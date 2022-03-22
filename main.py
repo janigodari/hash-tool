@@ -41,8 +41,6 @@ def addWarning(problem):
         window['warning'].update('No file was selected', text_color='white')
     elif problem == 2:
         window['warning'].update('Hash cant be completed, file not selected', text_color='white')
-    elif problem == 3:
-        window['warning'].update('Hash is not generated', text_color='white')
 
 def removeWarning():
     window['warning'].update('', text_color='white')
@@ -115,14 +113,10 @@ while True:
         removeWarning()
 
     elif event == 'Check':
-        try:
-            for x in range(0,3):
-                if hash_list[x] == values[1]:
-                    window[check_icon_key[x]].update(check_icon, text_color = 'white')
-            removeWarning()
-        except Exception as e:
-            addWarning(3)
-            pass
+        for x in range(0,3):
+            if hash_list[x] == values[1]:
+                window[check_icon_key[x]].update(check_icon, text_color = 'white')
+        removeWarning()
 
     elif event == 'md5Copy':
         pyperclip.copy(md5_hash)

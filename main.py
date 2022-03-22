@@ -45,6 +45,24 @@ def addWarning(problem):
 def removeWarning():
     window['warning'].update('', text_color='white')
 
+def resetLayout():
+    for key in check_icon_key:
+            window[key].update('')
+        
+    for key in copy_btn_key:
+        window[key].update(visible=False)
+        
+    for key in hash_text_key:
+        window[key].update('')
+        
+    try:
+        for x in range(0,3):
+            hash_list[x] = None
+            window['Check'].update(disabled=True)
+    except Exception as e:
+        pass
+    removeWarning()
+
 hash_text_key = ['md5Field', 'sha1Field', 'sha256Field']
 check_icon_key = ['md5Check', 'sha1Check', 'sha256Check']
 copy_btn_key = ['md5Copy', 'sha1Copy', 'sha256Copy']
@@ -76,6 +94,7 @@ while True:
             pass 
 
     elif event == 'Hash':
+        resetLayout()
         try:
             
             md5_hash = md5(content)
@@ -95,22 +114,7 @@ while True:
             pass
 
     elif event == 'Reset':
-        for key in check_icon_key:
-            window[key].update('')
-        
-        for key in copy_btn_key:
-            window[key].update(visible=False)
-        
-        for key in hash_text_key:
-             window[key].update('')
-        
-        try:
-            for x in range(0,3):
-                hash_list[x] = None
-            window['Check'].update(disabled=True)
-        except Exception as e:
-            pass
-        removeWarning()
+        resetLayout()
 
     elif event == 'Check':
         for x in range(0,3):

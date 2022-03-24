@@ -75,7 +75,7 @@ check_icon = '✓'
 
 sg.theme('Dark Grey 7')
 
-layout = [[sg.Text('File Path'), sg.Input(), sg.FileBrowse(), sg.Button('Ok')],
+layout = [[sg.Text('File Path'), sg.Input(), sg.FileBrowse()],
           [sg.Text('Check Hash'), sg.Input(), sg.Button('Check', disabled=True)],
           [sg.Text('Md5: ', size=(7, 1)), sg.Text(key = 'md5Field'), sg.Text(key='md5Check'), sg.Button('Copy', key='md5Copy', visible=False)],
           [sg.Text('Sha1: ', size=(7, 1)), sg.Text(key = 'sha1Field'), sg.Text(key='sha1Check'), sg.Button('Copy', key='sha1Copy', visible=False)],
@@ -88,7 +88,10 @@ while True:
     event, values = window.read()
     if event == sg.WIN_CLOSED:
         break
-    elif event == 'Ok':
+    
+    elif event == 'Hash':
+        resetLayout()
+
         try:
             fileName = values[0]
             content = returnContent(fileName)
@@ -98,8 +101,6 @@ while True:
                 addWarning(1)
             pass 
 
-    elif event == 'Hash':
-        resetLayout()
         try:
             
             md5_hash = md5(content)

@@ -63,6 +63,11 @@ def resetLayout():
         pass
     removeWarning()
 
+def copyHash(hash):
+    for i in range(0,3):
+        if hash == copy_btn_key[i]:
+            pyperclip.copy(hash_list[i])
+
 hash_text_key = ['md5Field', 'sha1Field', 'sha256Field']
 check_icon_key = ['md5Check', 'sha1Check', 'sha256Check']
 copy_btn_key = ['md5Copy', 'sha1Copy', 'sha256Copy']
@@ -121,14 +126,7 @@ while True:
             if hash_list[x] == values[1]:
                 window[check_icon_key[x]].update(check_icon, text_color = 'white')
         removeWarning()
-
-    elif event == 'md5Copy':
-        pyperclip.copy(md5_hash)
-
-    elif event == 'sha1Copy':
-        pyperclip.copy(sha1_hash)
-
-    elif event == 'sha256Copy':
-        pyperclip.copy(sha256_hash)
+    else:
+        copyHash(event)
 
 window.close()
